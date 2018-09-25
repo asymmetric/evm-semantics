@@ -36,7 +36,8 @@ stdenv.mkDerivation rec {
   '';
 
   # ocamlDeps = with ocamlPackages; [ zarith ];
-  buildInputs = [ flex k ncurses openjdk8 pandoc ];# ++ ocamlDeps;
+  buildInputs = [ bison flex gmp git k ncurses opam openjdk8 pandoc python3 ]; # ++ ocamlDeps;
+
   # preBuild = ''
   #     substituteInPlace Makefile --replace 'build-ocaml' \'\'
   # '';
