@@ -25,6 +25,7 @@ stdenv.mkDerivation rec {
 
   additionalIgnores = ''
     .build/k
+    tests
   '';
   src = gitignoreSourceAux additionalIgnores ./.;
 
