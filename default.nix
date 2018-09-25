@@ -30,7 +30,9 @@ stdenv.mkDerivation rec {
   src = gitignoreSourceAux additionalIgnores ./.;
 
   postPatch = ''
-    substituteInPlace Makefile --replace 'K_BIN=$(K_SUBMODULE)/k-distribution/target/release/k/bin' K_BIN=${k}/bin
+    substituteInPlace Makefile \
+      --replace 'K_BIN=$(K_SUBMODULE)/k-distribution/target/release/k/bin' K_BIN=${k}/bin \
+      --replace 'K_SUBMODULE:=$(BUILD_DIR)/k' K_SUBMODULE:=${k} \
   '';
 
   # ocamlDeps = with ocamlPackages; [ zarith ];
