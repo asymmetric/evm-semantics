@@ -26,11 +26,10 @@ stdenv.mkDerivation rec {
   src = gitignoreSource ./.;
 
   patchPhase = ''
-    for file in .build/k/k-distribution/bin/*; do
-      [ -f $file ] && substituteInPlace $file --replace "/usr/bin/env " ${bash}/bin/
-    done
-    for file in .build/k/k-distribution/lib/*; do
-      [ -f $file ] && substituteInPlace $file --replace "/usr/bin/env " ${bash}/bin/
+    for file in .build/k/k-distribution/{bin,lib}/*; do
+      [ -f $file ] && substituteInPlace $file \
+        --replace "/usr/bin/env sh" ${bash}/bin/sh \
+        --replace "/usr/bin/env bash" ${bash}/bin/bash
     done
   '';
 
