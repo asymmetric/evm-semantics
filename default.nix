@@ -29,6 +29,10 @@ stdenv.mkDerivation rec {
   '';
   src = gitignoreSourceAux additionalIgnores ./.;
 
+  postPatch = ''
+    substituteInPlace Makefile --replace 'K_BIN=$(K_SUBMODULE)/k-distribution/target/release/k/bin' K_BIN=${k}/bin
+  '';
+
   # ocamlDeps = with ocamlPackages; [ zarith ];
   buildInputs = [ flex k ncurses openjdk8 pandoc ];# ++ ocamlDeps;
   # preBuild = ''
