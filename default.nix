@@ -23,7 +23,10 @@ stdenv.mkDerivation rec {
   name    = "kevm";
   version = "2018-09-25";
 
-  src = gitignoreSource ./.;
+  additionalIgnores = ''
+    .build/k
+  '';
+  src = gitignoreSourceAux additionalIgnores ./.;
 
   # ocamlDeps = with ocamlPackages; [ zarith ];
   buildInputs = [ flex k ncurses openjdk8 pandoc ];# ++ ocamlDeps;
