@@ -43,8 +43,8 @@ stdenv.mkDerivation rec {
   '';
 
   installPhase = ''
-    mkdir -p $out/logs
-    cp kevm $out
+    mkdir -p $out/{bin,logs}
+    cp kevm $out/bin
     cp -R .build $out
   '';
 
