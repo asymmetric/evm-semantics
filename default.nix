@@ -3,8 +3,8 @@
   k ? (import ((pkgs.fetchFromGitHub {
     owner   = "asymmetric";
     repo    = "k";
-    rev     = "dc9a62f7d12559e7e2b0a020aea9e3260639b4b5";
-    sha256  = "0ms59s3bl0bb085wqckl8m6vjpis9imjjgmdf6j83yrfhim0p96p";
+    rev     = "2359a872136ecf938ccc6c288fd99e3308667601";
+    sha256  = "0x44is741brpdn051q7vcvbdnz7cd7688z5hp48cc0nchpvfcvfz";
   }) + /nix) { }).build,
 }:
 with pkgs;
@@ -24,14 +24,6 @@ stdenv.mkDerivation rec {
   version = "2018-09-25";
 
   src = gitignoreSource ./.;
-
-  patchPhase = ''
-    for file in .build/k/k-distribution/{bin,lib}/*; do
-      [ -f $file ] && substituteInPlace $file \
-        --replace "/usr/bin/env sh" ${bash}/bin/sh \
-        --replace "/usr/bin/env bash" ${bash}/bin/bash
-    done
-  '';
 
   # ocamlDeps = with ocamlPackages; [ zarith ];
   buildInputs = [ flex k ncurses openjdk8 pandoc ];# ++ ocamlDeps;
