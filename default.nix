@@ -43,7 +43,9 @@ stdenv.mkDerivation rec {
   '';
 
   installPhase = ''
-    mkdir $out
+    mkdir -p $out/logs
+    cp kevm $out
+    cp -R .build $out
   '';
 
   # preBuild = ''
