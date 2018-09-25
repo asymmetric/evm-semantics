@@ -8,11 +8,22 @@
   }) + /nix) { }).build,
 }:
 with pkgs;
+
+let
+  gitignore = import (fetchFromGitHub {
+    owner   = "siers";
+    repo    = "nix-gitignore";
+    rev     = "7a2a637fa4a753a9ca11f60eab52b35241ee3c2f";
+    sha256  = "0hrins85jz521nikmrmsgrz8nqawj52j6abxfcwjy38rqixcw8y1";
+  }) { inherit lib; };
+in
+  with gitignore;
+
 stdenv.mkDerivation rec {
   name    = "kevm";
   version = "2018-09-25";
 
-  src = ./.;
+  src = gitignoreSource ./.;
 
   patchPhase = ''
     for file in .build/k/k-distribution/bin/*; do
