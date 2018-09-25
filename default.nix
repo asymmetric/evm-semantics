@@ -36,10 +36,14 @@ stdenv.mkDerivation rec {
   '';
 
   # ocamlDeps = with ocamlPackages; [ zarith ];
-  buildInputs = [ bison flex gmp git k ncurses opam openjdk8 pandoc python3 ]; # ++ ocamlDeps;
+  buildInputs = [ bison flex gmp git k ncurses opam openjdk8 pandoc python3 z3 ]; # ++ ocamlDeps;
 
   buildPhase = ''
     make build-java
+  '';
+
+  installPhase = ''
+    mkdir $out
   '';
 
   # preBuild = ''
