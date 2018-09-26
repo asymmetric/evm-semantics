@@ -36,8 +36,7 @@ in stdenv.mkDerivation rec {
     sed -i 's|^K_SUBMODULE:=.*$|K_SUBMODULE:=${k}|' Makefile
   '';
 
-  # ocamlDeps = with ocamlPackages; [ zarith ];
-  buildInputs = [ bison flex gmp git k makeWrapper ncurses opam-stub openjdk8 pandoc python3 z3 ]; # ++ ocamlDeps;
+  buildInputs = [ bison flex gmp git makeWrapper ncurses opam-stub openjdk8 pandoc python3 ];
 
   buildPhase = ''
     make build-java
@@ -50,7 +49,7 @@ in stdenv.mkDerivation rec {
   '';
 
   fixupPhase = ''
-    wrapProgram $out/bin/kevm --prefix PATH : ${lib.makeBinPath [ opam-stub ]}
+    wrapProgram $out/bin/kevm --prefix PATH : ${lib.makeBinPath [ k opam-stub z3 ]}
   '';
 
   # preBuild = ''
