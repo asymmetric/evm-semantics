@@ -36,7 +36,7 @@ in stdenv.mkDerivation rec {
     sed -i 's|^K_SUBMODULE:=.*$|K_SUBMODULE:=${k}|' Makefile
   '';
 
-  buildInputs = [ bison flex gmp git makeWrapper ncurses opam-stub openjdk8 pandoc python3 ];
+  buildInputs = [ bison flex gmp git k makeWrapper ncurses opam-stub openjdk8 pandoc python3 ];
 
   buildPhase = ''
     make build-java
