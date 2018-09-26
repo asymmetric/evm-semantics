@@ -51,8 +51,9 @@ in stdenv.mkDerivation rec {
   '';
 
   fixupPhase = ''
-    wrapProgram $out/bin/kevm --prefix PATH : ${lib.makeBinPath [ k opam-stub z3 ]}
     sed -i 's|^build_dir=\(.*\)/|build_dir=\1/../|' $out/bin/kevm
+
+    wrapProgram $out/bin/kevm --prefix PATH : ${lib.makeBinPath [ k opam-stub openjdk8 z3 ]}
   '';
 
   # preBuild = ''
