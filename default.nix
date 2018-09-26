@@ -16,10 +16,12 @@ let
     rev     = "7a2a637fa4a753a9ca11f60eab52b35241ee3c2f";
     sha256  = "0hrins85jz521nikmrmsgrz8nqawj52j6abxfcwjy38rqixcw8y1";
   }) { inherit lib; };
-in
-  with gitignore;
 
-stdenv.mkDerivation rec {
+  opam-stub = writeScriptBin "opam" ''
+    #!${bash}/bin/bash
+    exit 0
+  '';
+in stdenv.mkDerivation rec {
   name    = "kevm";
   version = "2018-09-25";
 
@@ -27,7 +29,7 @@ stdenv.mkDerivation rec {
     .build/k
     tests
   '';
-  src = gitignoreSourceAux additionalIgnores ./.;
+  src = gitignore.gitignoreSourceAux additionalIgnores ./.;
 
   patchPhase = ''
     sed -i 's|^K_BIN=.*$|K_BIN=${k}/bin|' Makefile
@@ -35,7 +37,7 @@ stdenv.mkDerivation rec {
   '';
 
   # ocamlDeps = with ocamlPackages; [ zarith ];
-  buildInputs = [ bison flex gmp git k ncurses opam openjdk8 pandoc python3 z3 ]; # ++ ocamlDeps;
+  buildInputs = [ bison flex gmp git k makeWrapper ncurses opam-stub openjdk8 pandoc python3 z3 ]; # ++ ocamlDeps;
 
   buildPhase = ''
     make build-java
@@ -45,6 +47,10 @@ stdenv.mkDerivation rec {
     mkdir -p $out/{bin,logs}
     cp kevm $out/bin
     cp -R .build $out
+  '';
+
+  fixupPhase = ''
+    wrapProgram $out/bin/kevm --prefix PATH : ${lib.makeBinPath [ opam-stub ]}
   '';
 
   # preBuild = ''
