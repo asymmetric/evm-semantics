@@ -53,10 +53,8 @@ in stdenv.mkDerivation rec {
   fixupPhase = ''
     sed -i 's|^build_dir=\(.*\)/|build_dir=\1/../|' $out/bin/kevm
 
-    wrapProgram $out/bin/kevm --prefix PATH : ${lib.makeBinPath [ k opam-stub openjdk8 z3 ]}
+    wrapProgram $out/bin/kevm \
+      --prefix PATH : ${lib.makeBinPath [ k opam-stub openjdk8 z3 ]} \
+      --set K_BIN ${k}
   '';
-
-  # preBuild = ''
-  #     substituteInPlace Makefile --replace 'build-ocaml' \'\'
-  # '';
 }
