@@ -32,3 +32,6 @@
 
 # Documentation ignores
 docs/build
+
+# nix
+result
