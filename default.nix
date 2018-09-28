@@ -35,7 +35,7 @@ in stdenv.mkDerivation rec {
     sed -i 's#BUILD_DIR:=.*/\(.*\)$#BUILD_DIR:=$out/\1#' Makefile
     sed -i 's#^K_BIN=.*$#K_BIN=${k}/bin#' Makefile
     sed -i 's#^K_SUBMODULE:=.*$#K_SUBMODULE:=${k}#' Makefile
-    sed -i "s#-I .build/(java|haskell)$#-I $out/.build/\1#" Makefile
+    sed -i "s#-I .build/\(java|haskell\)$#-I $out/.build/\1#" Makefile
   '';
 
   buildInputs = [ bison flex gmp git k makeWrapper ncurses opam-stub openjdk8 pandoc python3 ];
