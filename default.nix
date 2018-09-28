@@ -32,10 +32,10 @@ in stdenv.mkDerivation rec {
   src = gitignore.gitignoreSourceAux additionalIgnores ./.;
 
   patchPhase = ''
-    sed -i 's|BUILD_DIR:=.*/\(.*\)$|BUILD_DIR:=$out/\1|' Makefile
-    sed -i 's|^K_BIN=.*$|K_BIN=${k}/bin|' Makefile
-    sed -i 's|^K_SUBMODULE:=.*$|K_SUBMODULE:=${k}|' Makefile
-    sed -i "s|-I .build/(java|haskell)$|-I $out/.build/\1|" Makefile
+    sed -i 's#BUILD_DIR:=.*/\(.*\)$#BUILD_DIR:=$out/\1#' Makefile
+    sed -i 's#^K_BIN=.*$#K_BIN=${k}/bin#' Makefile
+    sed -i 's#^K_SUBMODULE:=.*$#K_SUBMODULE:=${k}#' Makefile
+    sed -i "s#-I .build/(java|haskell)$#-I $out/.build/\1#" Makefile
   '';
 
   buildInputs = [ bison flex gmp git k makeWrapper ncurses opam-stub openjdk8 pandoc python3 ];
@@ -53,7 +53,7 @@ in stdenv.mkDerivation rec {
   '';
 
   fixupPhase = ''
-    sed -i 's|^build_dir=\(.*\)/|build_dir=\1/../|' $out/bin/kevm
+    sed -i 's#^build_dir=\(.*\)/#build_dir=\1/../#' $out/bin/kevm
 
     wrapProgram $out/bin/kevm \
       --prefix PATH : ${lib.makeBinPath [ k opam-stub openjdk8 z3 ]} \
