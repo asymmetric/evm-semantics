@@ -10,12 +10,12 @@
 with pkgs;
 
 let
-  gitignore = import (fetchFromGitHub {
+  gitignore = callPackage (fetchFromGitHub {
     owner   = "siers";
     repo    = "nix-gitignore";
-    rev     = "7a2a637fa4a753a9ca11f60eab52b35241ee3c2f";
-    sha256  = "0hrins85jz521nikmrmsgrz8nqawj52j6abxfcwjy38rqixcw8y1";
-  }) { inherit lib; };
+    rev     = "18de2d6f6c164a3524bd7d32785e16b73e961bb9";
+    sha256  = "0k0gicqvg6mzac1a96cgbwjnq5r8514pbgvfcczj4kb67m3rdmwc";
+  }) { };
 
   opam-stub = writeScriptBin "opam" ''
     #!${bash}/bin/bash
