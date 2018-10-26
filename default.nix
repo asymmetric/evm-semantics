@@ -62,7 +62,7 @@ in stdenv.mkDerivation rec {
     sed -i "s#\$build_dir#$out/.build#" $out/bin/kevm
 
     wrapProgram $out/bin/kevm \
-      --prefix PATH : ${lib.makeBinPath [ k opam-stub openjdk8 z3 ]} \
+      --prefix PATH : ${lib.makeBinPath [ gcc k opam-stub openjdk8 z3 ]} \
       --set K_BIN ${k}
   '';
 }
