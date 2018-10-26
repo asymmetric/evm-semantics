@@ -32,7 +32,7 @@ in stdenv.mkDerivation rec {
     sed -i 's#^K_SUBMODULE:=.*$#K_SUBMODULE:=${k}#' Makefile
     sed -i 's#-I .build/\(java|haskell\)$#-I $out/.build/\1#' Makefile
 
-    sed -i "s#BUILD_DIR:=.*/\(.*\)$#BUILD_DIR:=$out/\1#" Makefile
+    sed -i "s#BUILD_DIR:=.*/\(.*\)\$#BUILD_DIR:=$out/\1#" Makefile
 
     sed -i 's#^build_dir:=\(.*\)#build_dir:=../../\1#' tests/proofs/Makefile
     sed -i 's#^kevm_repo_dir:=.*$#kevm_repo_dir:=../..#' tests/proofs/Makefile
