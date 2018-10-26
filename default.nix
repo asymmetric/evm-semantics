@@ -30,7 +30,10 @@ in stdenv.mkDerivation rec {
   patchPhase = ''
     sed -i 's#^K_BIN=.*$#K_BIN=${k}/bin#' Makefile
     sed -i 's#^K_SUBMODULE:=.*$#K_SUBMODULE:=${k}#' Makefile
-    sed -i 's#-I .build/\(java|haskell\)$#-I $out/.build/\1#' Makefile
+
+    # change the lookup paths passed to kompile
+    sed -i "s#-I .build/java#-I $out/.build/java#" Makefile
+    sed -i "s#--directory .build/java#--directory $out/.build/java#" Makefile
 
     sed -i "s#BUILD_DIR:=.*/\(.*\)\$#BUILD_DIR:=$out/\1#" Makefile
 
