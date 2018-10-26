@@ -47,9 +47,10 @@ in stdenv.mkDerivation rec {
 
   installPhase = ''
     mkdir -p $out/{bin,tests}
-    cp kevm $out/bin/
+    cp -t $out/bin kast-json.py kevm
 
-    cp -R .build $out/
+    cp -R .build $out
+
     cp -R tests/proofs $out/tests
     mkdir $out/.build/logs
   '';
