@@ -13,8 +13,8 @@ let
   gitignore = callPackage (fetchFromGitHub {
     owner   = "siers";
     repo    = "nix-gitignore";
-    rev     = "18de2d6f6c164a3524bd7d32785e16b73e961bb9";
-    sha256  = "0k0gicqvg6mzac1a96cgbwjnq5r8514pbgvfcczj4kb67m3rdmwc";
+    rev     = "221d4aea15b4b7cc957977867fd1075b279837b3";
+    sha256  = "0xgxzjazb6qzn9y27b2srsp2h9pndjh3zjpbxpmhz0awdi7h8y9m";
   }) { };
 
   opam-stub = writeScriptBin "opam" ''
@@ -25,7 +25,7 @@ in stdenv.mkDerivation rec {
   name    = "kevm";
   version = "2018-09-25";
 
-  src = gitignore.gitignoreSource ./.;
+  src = gitignore.gitignoreSource [] ./.;
 
   patchPhase = ''
     sed -i 's#^K_BIN=.*$#K_BIN=${k}/bin#' Makefile
