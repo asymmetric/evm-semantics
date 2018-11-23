@@ -3,20 +3,13 @@
   k ? (import ((pkgs.fetchFromGitHub {
     owner   = "asymmetric";
     repo    = "k";
-    rev     = "7a53cb6758f61b6dc276a840c7fa7a622b57d13a";
-    sha256  = "0ac84p3wb3hwvghm5g0mlqfbygx67ra9mlzld0krqbd2hqdavnp4";
+    rev     = "c6a996d6e96d4be2d6740cea340c24adbbfe4b44";
+    sha256  = "1rv9c3dj90ybahgalj1j0yl0w160cgi67da5phbkd0dm2xs4hm27";
   }) + /nix) { }).build,
 }:
 with pkgs;
 
 let
-  gitignore = callPackage (fetchFromGitHub {
-    owner   = "siers";
-    repo    = "nix-gitignore";
-    rev     = "221d4aea15b4b7cc957977867fd1075b279837b3";
-    sha256  = "0xgxzjazb6qzn9y27b2srsp2h9pndjh3zjpbxpmhz0awdi7h8y9m";
-  }) { };
-
   opam-stub = writeScriptBin "opam" ''
     #!${bash}/bin/bash
     exit 0
@@ -25,7 +18,7 @@ in stdenv.mkDerivation rec {
   name    = "kevm";
   version = "2018-09-25";
 
-  src = gitignore.gitignoreSource [] ./.;
+  src = ./.;
 
   patchPhase = ''
     sed -i 's#^K_BIN=.*$#K_BIN=${k}/bin#' Makefile
