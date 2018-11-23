@@ -32,7 +32,7 @@ in stdenv.mkDerivation rec {
     sed -i 's#^K_SUBMODULE:=.*$#K_SUBMODULE:=${k}#' Makefile
 
     # change the lookup paths passed to kompile
-    sed -i "s#-I .build/java#-I $out/.build/java#" Makefile
+    sed -i "s#-I .build/java#-I $out/.build/java --cache-file $out/cache.bin#" Makefile
     sed -i "s#--directory .build/java#--directory $out/.build/java#" Makefile
 
     sed -i "s#BUILD_DIR:=.*/\(.*\)\$#BUILD_DIR:=$out/\1#" Makefile
