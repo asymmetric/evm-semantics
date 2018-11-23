@@ -3,8 +3,8 @@
   k ? (import ((pkgs.fetchFromGitHub {
     owner   = "asymmetric";
     repo    = "k";
-    rev     = "0f8c1bb9f6b661362358a8137bb0187e334f7ee3";
-    sha256  = "0bxhia9n226v4iz7p44x1zn06kwvvhnw2wjg099apg0h3r8rzxfg";
+    rev     = "7a53cb6758f61b6dc276a840c7fa7a622b57d13a";
+    sha256  = "0ac84p3wb3hwvghm5g0mlqfbygx67ra9mlzld0krqbd2hqdavnp4";
   }) + /nix) { }).build,
 }:
 with pkgs;
